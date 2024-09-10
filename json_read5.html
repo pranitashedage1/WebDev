@@ -14,7 +14,9 @@
     <script>
         $(document).ready(function(){
             $.getJSON("test1.json", function(json){
-                $("#p_content").html(json.instructor.name + "<br>" + "work @ " + json.instructor.work)
+                // $("#p_content").html(json.instructor.name + "<br>" + "work @ " + json.instructor.work)
+                $("#p_content").html(json.instructor.name + "<br> " + "work @ " + json.instructor.work);
+
             });
         });
 
