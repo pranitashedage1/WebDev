@@ -1,6 +1,7 @@
 {
     "instructor": {
         "name": "Pranita Shedage",
+        "@city": "Atl",
         "work":"KSU",
         "id":123,
         "course": [
