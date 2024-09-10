@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .movie-poster img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Movie Information</h1>
+<div id="movie-info">
+    <div id="movie-title"></div>
+    <div id="movie-year"></div>
+    <div id="movie-genres"></div>
+    <div id="movie-rating"></div>
+    <div id="movie-runtime"></div>
+    <div id="movie-critics-consensus"></div>
+    <div id="movie-release-dates"></div>
+    <div id="movie-synopsis"></div>
+    <div class="movie-poster" id="movie-poster"></div>
+    <div id="movie-cast"></div>
+    <div id="movie-directors"></div>
+    <div id="movie-studio"></div>
+</div>
+
+<script>
+    // JSON data
+    const movieData = {
+        "id": 770672122,
+        "title": "Toy Story 3",
+        "year": 2010,
+        "genres": [
+            "Animation",
+            "Kids & Family",
+            "Science Fiction & Fantasy",
+            "Comedy"
+        ],
+        "mpaa_rating": "G",
+        "runtime": 103,
+        "critics_consensus": "Deftly blending comedy, adventure, and honest emotion, Toy Story 3 is a rare second sequel that really works.",
+        "release_dates": {
+            "theater": "2010-06-18",
+            "dvd": "2010-11-02"
+        },
+        "ratings": {
+            "critics_rating": "Certified Fresh",
+            "critics_score": 99,
+            "audience_rating": "Upright",
+            "audience_score": 91
+        },
+        "synopsis": "Pixar returns to their first success with Toy Story 3. The movie begins with Andy leaving for college and donating his beloved toys -- including Woody (Tom Hanks) and Buzz (Tim Allen) -- to a daycare. While the crew meets new friends, including Ken (Michael Keaton), they soon grow to hate their new surroundings and plan an escape. The film was directed by Lee Unkrich from a script co-authored by Little Miss Sunshine scribe Michael Arndt. ~ Perry Seibert, Rovi",
+        "posters": {
+            "thumbnail": "http://content6.flixster.com/movie/11/13/43/11134356_tmb.jpg",
+            "profile": "http://content6.flixster.com/movie/11/13/43/11134356_tmb.jpg",
+            "detailed": "http://content6.flixster.com/movie/11/13/43/11134356_tmb.jpg",
+            "original": "http://content6.flixster.com/movie/11/13/43/11134356_tmb.jpg"
+        },
+        "abridged_cast": [
+            {
+                "name": "Tom Hanks",
+                "characters": ["Woody"]
+            },
+            {
+                "name": "Tim Allen",
+                "characters": ["Buzz Lightyear"]
+            },
+            {
+                "name": "Joan Cusack",
+                "characters": ["Jessie the Cowgirl"]
+            },
+            {
+                "name": "Don Rickles",
+                "characters": ["Mr. Potato Head"]
+            },
+            {
+                "name": "Wallace Shawn",
+                "characters": ["Rex"]
+            }
+        ],
+        "abridged_directors": [{"name": "Lee Unkrich"}],
+        "studio": "Walt Disney Pictures",
+        "alternate_ids": {"imdb": "0435761"},
+        "links": {
+            "self": "http://api.rottentomatoes.com/api/public/v1.0/movies/770672122.json",
+            "alternate": "http://www.rottentomatoes.com/m/toy_story_3/",
+            "cast": "http://api.rottentomatoes.com/api/public/v1.0/movies/770672122/cast.json",
+            "clips": "http://api.rottentomatoes.com/api/public/v1.0/movies/770672122/clips.json",
+            "reviews": "http://api.rottentomatoes.com/api/public/v1.0/movies/770672122/reviews.json",
+            "similar": "http://api.rottentomatoes.com/api/public/v1.0/movies/770672122/similar.json"
+        }
+    };
+
+    // Display movie data
+    document.getElementById('movie-title').innerText = `Title: ${movieData.title}`;
+    document.getElementById('movie-year').innerText = `Year: ${movieData.year}`;
+    document.getElementById('movie-genres').innerText = `Genres: ${movieData.genres.join(', ')}`;
+    document.getElementById('movie-rating').innerText = `MPAA Rating: ${movieData.mpaa_rating}`;
+    document.getElementById('movie-runtime').innerText = `Runtime: ${movieData.runtime} minutes`;
+    document.getElementById('movie-critics-consensus').innerText = `Critics Consensus: ${movieData.critics_consensus}`;
+    document.getElementById('movie-release-dates').innerText = `Release Dates - Theater: ${movieData.release_dates.theater}, DVD: ${movieData.release_dates.dvd}`;
+    document.getElementById('movie-synopsis').innerText = `Synopsis: ${movieData.synopsis}`;
+    document.getElementById('movie-poster').innerHTML = `<img src="${movieData.posters.original}" alt="${movieData.title} Poster">`;
+
+    // Display cast
+    let castHTML = '<h3>Cast:</h3><ul>';
+    movieData.abridged_cast.forEach(actor => {
+        castHTML += `<li>${actor.name} as ${actor.characters.join(', ')}</li>`;
+    });
+    castHTML += '</ul>';
+    document.getElementById('movie-cast').innerHTML = castHTML;
+
+    // Display directors
+    let directorsHTML = '<h3>Directors:</h3><ul>';
+    movieData.abridged_directors.forEach(director => {
+        directorsHTML += `<li>${director.name}</li>`;
+    });
+    directorsHTML += '</ul>';
+    document.getElementById('movie-directors').innerHTML = directorsHTML;
+
+    document.getElementById('movie-studio').innerText = `Studio: ${movieData.studio}`;
+</script>
+
+</body>
+</html>
