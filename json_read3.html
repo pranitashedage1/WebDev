@@ -1,0 +1,22 @@
+<!-- stringify function -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document 3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+</head>
+<script>
+    var json_obj = {"name":"Pranita", "work":"KSU", "id":123}
+    var json_example = JSON.stringify(json_obj)
+    $(document).ready(function(){
+        $('#p_name').append(json_example)
+    })
+</script>
+<body>
+    <p>Employee Information 3</p>
+    <p id="p_name">Name =</p>
+</body>
+</html>

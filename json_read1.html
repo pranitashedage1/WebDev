@@ -1,0 +1,27 @@
+
+<!-- Normal read from the JSON string -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document 1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        var json_example = {"name":"Pranita", "work":"KSU", "id":123}
+        // var json_example = {name:"Pranita", work:"KSU", id:123}
+        $(document).ready(function(){
+            $('#p_name').append(json_example.name)
+            $('#p_work').append(json_example.work)
+            $('#p_id').append(json_example.id)
+        })
+    </script>
+</head>
+<body>
+    <p>Employee Information 1</p>
+    <p id="p_name">Name =</p>
+    <p id="p_work">work = </p>
+    <p id="p_id">id = </p>
+</body>
+</html>

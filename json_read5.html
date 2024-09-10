@@ -1,0 +1,27 @@
+<!-- Read html content form the file -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document 5</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+
+<body>
+    <script>
+        $(document).ready(function(){
+            $.getJSON("test1.json", function(json){
+                $("#p_content").html(json.instructor.name + "work @" + json.instructor.work)
+            });
+        });
+
+    </script>
+    <h1>Read conent fromt the JSON file</h1>
+    <p>This is a JSON file <a href="test1.json"> Test1.json file</a></p>
+    <p id="p_content"></p>
+
+</body>
+</html>

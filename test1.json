@@ -1,0 +1,17 @@
+{
+    "instructor": {
+        "name": "Pranita Shedage",
+        "work":"KSU",
+        "id":123,
+        "course": [
+            {
+                "title": "IT4403",
+                "enrollment":40
+            },
+            {
+                "title": "IT3003",
+                "enrollment":30
+            }
+        ]
+        }
+}

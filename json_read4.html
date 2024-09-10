@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document 4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- <p id="p_instructor">Instructor</p> -->
+    <p id="p_id">course</p>
+    <!-- <p id="p_course">id</p> -->
+</body>
+<script>
+    $(document).ready(function(){
+        var JSON = {
+        "instructor":
+        {
+            "firstName":"Pranita",
+            "lastName":"Shedage",
+            "Title":"Advance_web",
+            "course": [
+               {
+                "title":"IT4403",
+                "Enrollment":40
+               },
+               {
+                "title": "IT3003",
+                "Enrollment":30
+               }
+            ]
+        }
+    };
+
+    var courseHTML = "";
+    courseHTML += JSON.instructor.firstName;
+    for( i in JSON.instructor.course){
+        courseHTML += "<br>" + JSON.instructor.course[i].title + "-" + JSON.instructor.course[i].Enrollment
+    }
+    $('#p_id').html(courseHTML);
+    });
+    
+
+    
+
+</script>
+</html>
