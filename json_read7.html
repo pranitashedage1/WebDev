@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .book {
+            margin-bottom: 20px;
+        }
+        .book img {
+            max-width: 150px;
+            height: auto;
+            display: block;
+        }
+        .book-title {
+            font-weight: bold;
+        }
+        .book-authors {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Books on Modern Web</h1>
+<div id="book-list"></div>
+
+<script>
+    // URL of the JSON data
+    const apiUrl = 'https://www.googleapis.com/books/v1/volumes?q=modern%20web';
+
+    // Fetch JSON data
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const books = data.items; // Assuming 'items' is the key where book data is stored
+            let bookListHTML = '';
+
+            // Loop through the books and build HTML
+            books.forEach(book => {
+                const volumeInfo = book.volumeInfo;
+                const title = volumeInfo.title || 'No title available';
+                const authors = volumeInfo.authors ? volumeInfo.authors.join(', ') : 'No authors available';
+                const imageLinks = volumeInfo.imageLinks;
+                const thumbnail = imageLinks ? imageLinks.thumbnail : 'No image available';
+
+                bookListHTML += `
+                    <div class="book">
+                        <img src="${thumbnail}" alt="${title}">
+                        <div class="book-title">${title}</div>
+                        <div class="book-authors">${authors}</div>
+                    </div>
+                `;
+            });
+
+            // Insert HTML into the page
+            document.getElementById('book-list').innerHTML = bookListHTML;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+</script>
+
+</body>
+</html>
