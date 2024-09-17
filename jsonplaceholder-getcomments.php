@@ -9,7 +9,7 @@
 <body>
 
 <?php
-    $service_point ="http://jsonplaceholder.typicode.com/posts/1/comments";
+    $service_point ="https://jsonplaceholder.typicode.com/posts/1/comments";
 	$resource=file_get_contents($service_point);
 ?>
 
