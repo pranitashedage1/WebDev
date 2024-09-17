@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comments</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+
+<script>
+    $(function(){
+        $.ajax('https://jsonplaceholder.typicode.com/posts/1/comments', {
+          method: 'GET'
+        }).then(function(data) {
+          var resultsHTML = "";
+          for (var i in data) {
+              resultsHTML += "<h3>" + data[i].id + ". ";
+              resultsHTML += data[i].name + " - ";
+              resultsHTML += data[i].email + "</h3>";
+              resultsHTML += "<p>" + data[i].body + "</p>";
+              resultsHTML += "<hr>";
+          }
+          $("#results").html(resultsHTML);
+        });
+    });
+</script>
+
+<h1>Comments</h1>
+<div id="results"></div>
+
+</body>
+</html>
