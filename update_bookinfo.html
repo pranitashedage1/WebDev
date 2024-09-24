@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        $(function(){
+            // var id = 'buc0AAAAMAAJ'
+            var id = '5iTebBW-w7QC'
+            var service_point = 'https://www.googleapis.com/books/v1/volumes/' + id
+            $.getJSON(service_point, function(json){
+                var title = json.volumeInfo.title
+                var authors = json.volumeInfo.authors
+                var description = json.volumeInfo.description
+                var url = json.volumeInfo.infoLink
+                var image = json.volumeInfo.imageLinks.small
+                
+                $('#title').append(title)
+                $('#author').append(authors)
+                $('#description').append(description)
+                $('#url').text(url).attr("href", url)
+                $('#imageURL').attr("src", image)
+                
+                var categoriesHTML = ""
+                for (i in json.volumeInfo.categories){
+                    categoriesHTML+=json.volumeInfo.categories[i]+"<br> ";
+                }
+                $("#categories").append(categoriesHTML);
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <h1 id="title">Book Name : </h1>
+    <p id="author">Authors : </p>
+    <p id="description">Book description : </p>
+    <p>Book URL : <a id="url"></a></p>
+    <img id="imageURL">
+    <p id="categories">Book Categories : <br></p>
+    
+</body>
+</html>

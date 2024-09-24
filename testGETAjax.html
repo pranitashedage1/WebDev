@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTTP REST method GET demo</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+
+<body>
+
+<h2>Post Data</h2>
+<div id="post-data">
+    <!-- Data will be inserted here -->
+</div>
+
+<script>
+    $(function(){
+        // Perform GET request to fetch data
+        $.ajax('https://jsonplaceholder.typicode.com/posts/1', {
+          method: 'GET',
+        }).then(function(data) {
+          // Log the data to console
+          console.log(data);
+
+          // Display data on the webpage
+          $('#post-data').html(
+            '<p><strong>Title:</strong> ' + data.title + '</p>' +
+            '<p><strong>Body:</strong> ' + data.body + '</p>'
+          );
+        });
+    });
+</script>
+
+<p>Data fetched from the JSONPlaceholder API and displayed on the page.</p>
+
+</body>
+</html>
