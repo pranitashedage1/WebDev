@@ -11,6 +11,7 @@
         xmlHttp = new XMLHttpRequest(); // use the function below GetXmlHttpObject() if you want to deal with earlier version browsers.
         xmlHttp.onreadystatechange = function () //default anonymous function
 		{
+            console.log("ReadyState:", xmlHttp.readyState);
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                 document.getElementById('ajaxDiv1').innerHTML = xmlHttp.responseText;
         };
