@@ -15,7 +15,6 @@
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                 document.getElementById('ajaxDiv1').innerHTML = xmlHttp.responseText;
         };
-        console.log("ReadyState:", xmlHttp.readyState);
         xmlHttp.open("GET", 'server-partial-file.html', true);
         xmlHttp.send();
     }
