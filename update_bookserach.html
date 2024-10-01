@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1 id="title"></h1>
-<h2>Searched "jquery"; Total results: <span id="total"></span>
+<h2>Searched "harry potter"; Total results: <span id="total"></span>
 
 <p>The results from 30 to 45 are displayed here (15 per page; results page #3).</p></h2>
 <div id="results" style="display: flex; flex-wrap: wrap;"></div>
@@ -15,7 +15,7 @@
 <script>
     $(function(){
 		var term = "harry potter"; //or get the value from a textbox user input; you can Google how to do it.
-		var parameter="?q="+term+"&startIndex=0&maxResults=15"; 
+		var parameter="?q="+term+"&startIndex=0&maxResults=25"; 
 		var service_point="https://www.googleapis.com/books/v1/volumes/"+parameter;
         $.getJSON(service_point, function (json)
         {
