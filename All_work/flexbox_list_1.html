@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow List Layout with flex boxt</title>
+    <style>
+    #box
+    {
+        display: flex;
+        flex-wrap: wrap;
+        border:  3px solid red;
+        width: 800 px;
+    }
+
+    .boxitem
+    {
+        border: thin solid blue;
+        background-color: antiquewhite;
+        width: 98%;
+        margin: 5px;
+        height: 80px;
+    }
+
+    </style>
+
+</head>
+<body>
+    <h1>Flow list layout with flexbox</h1>
+    <p>Flow list</p>
+    <div id="box">
+        <script>
+            for(i=0; i < 8; i++)
+            {
+             document.write("<div class='boxitem'>data</div>"); 
+            }
+        </script>
+    </div>
+
+</body>
+</html>
