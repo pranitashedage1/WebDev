@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Data Details UI: Inline Expansion</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.0/mustache.min.js"></script>
+	<script id="booklisttemplate" type="text/template">
+		{{#items}}
+		<div class='booklistitem' data-bookid="{{id}}">
+			<div class="booklistitemheader" data-bookid="{{id}}">
+				<img src='{{volumeInfo.imageLinks.smallThumbnail}}'  width=50 /> {{volumeInfo.title}}
+			</div>
+			<div class='bookdetails' style='display:none'></div>
+		</div>
+		{{/items}}
+	</script>
+	<script id="bookdetailstemplate" type="text/template">
+			<h2>{{volumeInfo.title}}</h2>
+			<img src='{{volumeInfo.imageLinks.thumbnail}}' style="float: left"/>
+			<div style="margin-left: 220px"> <br> By {{volumeInfo.authors}} - {{volumeInfo.publishedDate}}
+			<h4>Description</h4>
+				<div>{{volumeInfo.description}}</div>
+				<p><a href='{{volumeInfo.infoLink}}' target='_blank'>More Information on Google</a></p>
+			</div>
+			<div style="clear:both"></div>
+	</script>
+
+	<script type="text/javascript">
+     $(document).ready(function ()
+     {
+         var service_point="https://www.googleapis.com/books/v1/volumes";
+		 
+		 $("#btnSearch").click(function ()
+         {
+            var term=$("#searchTerm").val();
+			var parameter="?q="+term+"&maxResults="+12;
+			searchBooks(service_point+parameter);
+         });
+     });
+
+     function searchBooks(serviceUrl)
+     {
+         $("#booklist").html("Searching ..."+"<img src='http://vignette1.wikia.nocookie.net/wikiality/images/7/70/ProgressBar.gif/revision/latest?cb=20070406024457'>");
+         //we can use AJAX here because this service provider allows cross origin request
+         $.getJSON(serviceUrl, function (searchResultsJson)
+         {
+			var template = $('#booklisttemplate').html();
+			var html = Mustache.render(template, searchResultsJson);
+			$("#booklist").html(html);
+            $(".booklistitemheader").on('click', function () 
+			{ 
+				div=$(this).next(); // get the book details div, which is immediately following the header div
+				getBookDetails(searchResultsJson, $(this).attr("data-bookid"), div); 
+			});
+         });
+     }
+
+     function getBookDetails(searchResults, bookid, div)
+     {
+		// it's best we issue another AJAX requet to the Books API to get book details. I just simply used the information from the search results.
+		var template = $('#bookdetailstemplate').html();
+        $.each(searchResults.items, function (index, book)
+		{
+			if (book.id == bookid)
+			{
+				var html = Mustache.render(template, searchResults.items[index]);
+				$(div).html(html);
+				$(div).slideToggle();
+			}
+		})
+     }
+</script>
+
+<style>
+	#header
+	{
+		background-color: #97E300;
+		position:fixed; top: 0; left: 0px;
+		width: 100%;
+		padding: 5px;
+	}
+	#maincontent
+	{
+		margin-top:120px;
+	}
+    .booklistitem
+	{
+		border: thin solid gray;
+		background-color: #F2FFE5;
+		margin:1px;
+	}
+	.booklistitemheader
+	{
+		cursor: pointer;
+	}
+	.booklistitemheader:hover
+	{		background-color: #8CFF1A;	}
+	
+	.bookdetails
+	{	border: thin solid #66ddee; 
+		padding: 10px;
+		margin:10px;
+		background-color: white;
+	}
+</style>
+
+</head>
+
+<body>
+<div id="header">
+	<h1>Book search</h1>
+	<input type="text" id="searchTerm" value="Data Visualization" />
+	<input type="button" id="btnSearch" value="Search" />
+</div>
+<div id="maincontent">
+	<div id="booklist"></div>
+</div>
+</body>
+</html>

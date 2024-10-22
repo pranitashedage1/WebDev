@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>load more data 1: paging</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript">
+     $(document).ready(function ()
+     {
+         var servicesite="https://www.googleapis.com/books/v1/volumes/?q=";
+
+         //search event and actions
+		 $("#button1").click(function ()
+         {
+            var url=servicesite + $("#searchTerm").val();
+			searchBooks(url);
+			
+			//create paging
+			$("#pages").html("Pages: ");
+			for (i=1;i<=5;i++) // 5 is hard coded, a better solutions is to determine the actual number.
+				$("#pages").append("<a class='page' href='#'>"+i+"</a> ");
+         });
+		 
+		 //add click events to pages so additional ajax can be triggered
+		 $("#pages").on('click', function (event)
+         {
+             var number = event.target.textContent; // or $(event.target).text() in jQuery
+             var url=servicesite + $("#searchTerm").val()+"&startIndex="+(number-1)*10;
+             searchBooks(url);
+         });
+
+     });
+
+     function searchBooks(servicePoint)
+     {
+         $("#books").html("Searching ..."+"<img src='http://vignette1.wikia.nocookie.net/wikiality/images/7/70/ProgressBar.gif/revision/latest?cb=20070406024457'>");
+         $.getJSON(servicePoint, function (jsonData)
+         {
+             $("#books").html("<p>Service URL: "+servicePoint+"</p>");
+             $.each(jsonData.items, function (index, book)
+             {
+                 $("#books").append("<img class='bookicon' id='" + book.id + "' src='" + book.volumeInfo.imageLinks.smallThumbnail + "' width=80 />");
+             });
+             $(".bookicon").on('click', function () { getBookDetails($(this).attr("id")); });
+         });
+     }
+
+     function getBookDetails(bookid)
+     {
+         $("#book").html("Working ..."+"<img src='http://vignette1.wikia.nocookie.net/wikiality/images/7/70/ProgressBar.gif/revision/latest?cb=20070406024457'>");
+		 $("#book").html("<h2>Book ISBN: " + bookisbn + "</h2>");
+     }
+
+</script>
+<style>        
+	.bookicon {vertical-align: top; margin: 1px;}
+	.bookicon:hover 
+	{
+		width: 100px; cursor: pointer; margin: 0 -10px 0 -10px;
+		border: 1px solid blue; z-index: 9999; position:relative;
+	}
+	.page
+	{
+		border: thin solid blue;
+		padding:10px;
+	}
+</style>
+</head>
+
+<body>
+	<h1>Load more data through pagination</h1>
+	<input type="text" id="searchTerm" value="mobile web" />
+	<input type="button" id="button1" value="Search" /> <span id="pages"></span>
+	<h4>Search Results</h4>
+	<div id="books"></div>
+	<div id="book" style="width: 800px; max-height: 100px"></div>
+</body>
+</html>
