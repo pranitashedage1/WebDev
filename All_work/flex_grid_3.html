@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid layout with the flex box</title>
+    <style>
+    #box
+    {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        border:  3px solid red;
+        width: 800 px;
+        flex-grow: 1;
+    }
+
+    .boxitem
+    {
+        border: thin solid blue;
+        background-color: antiquewhite;
+        width: 23%;
+        margin: 5px;
+        height: 150px;
+    }
+    #special
+    {
+        flex-basis: 47.5%;
+        background-color: red;
+    }
+
+    </style>
+
+</head>
+<body>
+    <h1>Grid iew</h1>
+    <p>grid view</p>
+    <div id="box">
+        <div id="special" class="boxitem">Special promotional item</div>
+        <script>
+            
+            for(i=0; i < 8; i++)
+            {
+             document.write("<div class='boxitem'>data</div>"); 
+            }
+        </script>
+    </div>
+
+</body>
+</html>

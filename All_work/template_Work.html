@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+</head>
+<body>
+
+    <!-- This is where the generated HTML will be inserted -->
+    <div id="user-list"></div>
+
+    <script>
+        // JavaScript to create the user list and inject into the page
+        let users = [
+            { "name": "Alice", "age": 25, "email": "alice@example.com" },
+            { "name": "Bob", "age": 30, "email": "bob@example.com" }
+        ];
+
+        let html = "<ul>";
+        for (let i = 0; i < users.length; i++) {
+            html += "<li>" + users[i].name + " (" + users[i].age + ") - " + users[i].email + "</li>";
+        }
+        html += "</ul>";
+
+        // Insert the generated HTML into the div with id="user-list"
+        document.getElementById("user-list").innerHTML = html;
+
+        // Optionally log the HTML to the console
+        console.log(html);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List with jQuery</title>
+    
+    <!-- Include jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <!-- This is where the generated HTML will be inserted -->
+    <div id="user-list"></div>
+
+    <script>
+        $(document).ready(function(){
+            // Fetch the JSON file using $.getJSON
+            $.getJSON("/All_work/template_json.json", function(users){
+                let html = "<ul>";
+                // Loop through the users array and create list items
+                $.each(users, function(index, user) {
+                    html += "<li>" + user.name + " (" + user.age + ") - " + user.email + "</li>";
+                });
+                html += "</ul>";
+
+                // Insert the generated HTML into the div with id="user-list"
+                $('#user-list').html(html);
+
+                // Optionally log the generated HTML to the console
+                console.log(html);
+            })
+            .fail(function() {
+                console.error('Error fetching JSON data.');
+            });
+        });
+    </script>
+
+</body>
+</html>
