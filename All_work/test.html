@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.0/mustache.min.js"></script>
+
+    <script id="booktemplate" type="text/template">
+        {{#item}}
+            <div class="book">
+                <h2>{{VolumeInfo.title}}</h2>
+                <img src='{{volumeInfo.imageLinks.smallThumbnail}}' width='100' />
+                <div>{{volumeInfo.description}}</div>
+            </div>
+        {{/item}}
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#button1").click(function(){
+                $("$results").html("Searching....")
+                $.getJSON("https://www.googleapis.com/books/v1/volumes/?q=" + $("#searchItem").val, function(jsonData){
+                    $("$results").html("");
+                    var template = $("#booktemplate").html();
+                    var html = Mustache.render(template, jsonData);
+                    $("#results").html(html);
+                });
+            })
+        });
+    </script>
+
+<style>
+#results
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+.book
+{
+    border: thin solid blue;
+    width: 80%;
+    margin: 5px;
+}
+
+</style>
+
+</head>
+<body>
+    <h1>Mustache template</h1>
+    <input type="text" name="" id="searchItem">
+    <input type="button" name="" value="click me for search" id="button1">
+    <div id="results"></div>
+</body>
+</html>
