@@ -21,7 +21,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $("#button1").click(function(){
-                $("$results").html("Searching....")
+                $("#results").html("Searching....")
                 $.getJSON("https://www.googleapis.com/books/v1/volumes/?q=" + $("#searchItem").val, function(jsonData){
                     $("$results").html("");
                     var template = $("#booktemplate").html();
