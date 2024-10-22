@@ -8,13 +8,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.0/mustache.min.js"></script>
 
     <script id="booktemplate" type="text/template">
-        {{#item}}
+        {{#items}}
             <div class="book">
                 <h2>{{VolumeInfo.title}}</h2>
                 <img src='{{volumeInfo.imageLinks.smallThumbnail}}' width='100' />
                 <div>{{volumeInfo.description}}</div>
             </div>
-        {{/item}}
+        {{/items}}
 
     </script>
 
@@ -23,7 +23,7 @@
             $("#button1").click(function(){
                 $("#results").html("Searching....")
                 $.getJSON("https://www.googleapis.com/books/v1/volumes/?q=" + $("#searchItem").val(), function(jsonData){
-                    $("$results").html("");
+                    $("#results").html("");
                     var template = $("#booktemplate").html();
                     var html = Mustache.render(template, jsonData);
                     $("#results").html(html);
