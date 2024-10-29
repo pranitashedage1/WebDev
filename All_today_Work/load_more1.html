@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>load more 1</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+            var servicesite="https://www.googleapis.com/books/v1/volumes/?q=";
+            
+            // serach event and action
+            $("#button1").click(function(){
+                var url = servicesite + $("#searchBar").val()
+                searchBooks(url)
+
+                // create paging
+                $("#pages").html("Pages :")
+                for (i=1;i<=5;i++){
+                    $("#pages").append("<a class='page' href='#' >" + i + "</a>")
+                }
+
+                // for (i=1;i<=5;i++) // 5 is hard coded, a better solutions is to determine the actual number.
+				// $("#pages").append("<a class='page' href='#'>"+i+"</a> ");
+
+            });
+
+            // Add click event to pages so additional ajax can be triggered - 
+            $("#pages").on('click', function(event){
+                // var number = event.target.textContent;
+                // var url = servicesite + $("#serachBar").val() + "&startindex=" + (number-1)*10;
+                // searchBooks(url);
+
+                var number = event.target.textContent; // or $(event.target).text() in jQuery
+                var url=servicesite + $("#searchBar").val()+"&startIndex="+(number-1)*10;
+                searchBooks(url);
+            });
+
+        });
+
+        // Get books info - 
+        function searchBooks(serviceURL){
+            $("#books").html("seraching....")
+            $.getJSON(serviceURL, function(jsonData){
+                $("#books").html("<p> Service URL: " + serviceURL + "</p>")
+                $.each(jsonData.items, function(index, book){
+                    $("#books").append("<img class='bookicon' src='"+book.volumeInfo.imageLinks.smallThumbnail+ "' width=80/>")
+                });
+            });
+        }
+
+    </script>
+    <style>        
+        .bookicon {vertical-align: top; margin: 1px;}
+        .bookicon:hover 
+        {
+            width: 100px; cursor: pointer; margin: 0 -10px 0 -10px;
+            border: 1px solid blue; z-index: 9999; position:relative;
+        }
+        .page
+        {
+            border: thin solid blue;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Load more data through pagination</h1>
+    <div id="url"></div>
+    <div id="SearchResults">Search Results</div>
+    <input type="text" name="" id="searchBar" placeholder="Search a Keyword">
+    <input type="button" name="" id="button1" value="Click me"> <span id="pages"></span>
+    <div id="books"></div>
+    <div id="book"></div>
+</body>
+</html>
