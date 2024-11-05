@@ -32,7 +32,7 @@
 
      function searchBooks(servicePoint)
      {
-         $("#books").html("Searching ..."+"<img src='http://vignette1.wikia.nocookie.net/wikiality/images/7/70/ProgressBar.gif/revision/latest?cb=20070406024457'>");
+         $("#books").html("Searching ..."+"<img src='http://vignette1.wikia.nocookie.net/wikiality/images/7/70/ProgressBar.gif'>");
          $.getJSON(servicePoint, function (jsonData)
          {
              $("#books").html("<p>Service URL: "+servicePoint+"</p>");

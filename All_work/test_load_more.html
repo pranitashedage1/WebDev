@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pages Selections </title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            var servicePoint = "https://www.googleapis.com/books/v1/volumes/?q=";
+
+            $("#button1").click(function(){
+                var url = servicePoint + $("#searchBar").val()
+                serachFunction(url)
+
+                $("#test").append("Pages :")
+                for (i=1; i <= 5; i++){
+                    $("#test").append("<a class='page' href='#'>"+i+"</a> ");
+                }
+            });
+
+            $("#test").on('click', function (event)
+            {
+                var number = event.target.textContent; // or $(event.target).text() in jQuery
+                var url=servicePoint + $("#searchBar").val()+"&startIndex="+(number-1)*10;
+                serachFunction(url);
+            });
+        });
+
+        function serachFunction(url_paramter){
+            $.getJSON(url_paramter, function(jsonData){
+                $("#Result").html("Seaching")
+                $("#Result").append("<br>")
+                $.each(jsonData.items, function(index, book){
+                    $("#Result").append("<img class='bookicon' src='" + book.volumeInfo.imageLinks.smallThumbnail + "' width=80 />" )
+                });
+            });
+        }
+
+    </script>
+    <style>        
+        .bookicon {vertical-align: top; margin: 1px;}
+        .bookicon:hover 
+        {
+            width: 100px; cursor: pointer; margin: 0 -10px 0 -10px;
+            border: 1px solid blue; z-index: 9999; position:relative;
+        }
+        .page
+        {
+            border: thin solid blue;
+            padding:10px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1 id="h1_heading_id">Load more data through pagination</h1>
+    <input type="text" name="" id="searchBar" placeholder="Seach">
+    <input type="button" name="" id="button1" value="Click Me"> <span id="test"></span>
+    <div id="Result"></div>
+    <div id="Pages"></div>
+    <div id="page"></div>
+
+</body>
+</html>
