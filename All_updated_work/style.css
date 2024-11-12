@@ -1,0 +1,23 @@
+div{
+    background-color: goldenrod;
+}
+
+p{
+    font-size: 40px;
+}
+
+@media (orientation: landscape){
+    div{
+        background-color: dimgray;
+        color: azure;
+        font: 10px;
+    }
+}
+
+/* @media screen and (max-width: 480px){
+    div{
+        background-color: dimgray;
+        color: azure;
+        font: 10px;
+    }
+} */
